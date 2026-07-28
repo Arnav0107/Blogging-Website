@@ -30,12 +30,17 @@ import Notification from "./Schema/Notification.js";
 import Comment from "./Schema/Comment.js"; // ✅ NEW
 
 // Firebase admin
-const serviceAccountKey = JSON.parse(
-  fs.readFileSync(
-    path.join(__dirname, "react-js-blog-website-82fff-firebase-adminsdk-fbsvc-b471697bc3.json"),
-    "utf8",
-  ),
-);
+let serviceAccountKey;
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+  serviceAccountKey = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+} else {
+  serviceAccountKey = JSON.parse(
+    fs.readFileSync(
+      path.join(__dirname, "react-js-blog-website-82fff-firebase-adminsdk-fbsvc-b471697bc3.json"),
+      "utf8",
+    ),
+  );
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey),
