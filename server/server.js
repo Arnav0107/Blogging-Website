@@ -17,6 +17,11 @@ import { getAuth } from "firebase-admin/auth";
 import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
 import jwt from "jsonwebtoken";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Schemas
 import User from "./Schema/User.js";
@@ -27,7 +32,7 @@ import Comment from "./Schema/Comment.js"; // ✅ NEW
 // Firebase admin
 const serviceAccountKey = JSON.parse(
   fs.readFileSync(
-    "./react-js-blog-website-82fff-firebase-adminsdk-fbsvc-b471697bc3.json",
+    path.join(__dirname, "react-js-blog-website-82fff-firebase-adminsdk-fbsvc-b471697bc3.json"),
     "utf8",
   ),
 );
